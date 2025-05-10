@@ -16,7 +16,8 @@ app.get('/site', async (req, res) => {
   }
 });
 
-// Inicia o servidor na porta 3000
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+// O Vercel fornece a variável de ambiente PORT, use ela para escutar
+const port = process.env.PORT || 3000; // Fallback para 3000 em desenvolvimento local
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
