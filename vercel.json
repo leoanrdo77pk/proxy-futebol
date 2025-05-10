@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/futebol",
-      "destination": "https://futebol7k.com"
+      "destination": "/index.html"
     }
   ]
 }
