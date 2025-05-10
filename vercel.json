@@ -8,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/site",
-      "dest": "/index.js"
+      "src": "/futebol/(.*)",
+      "dest": "index.js"
     }
   ]
 }
