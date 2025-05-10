@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/site",
-      "destination": "https://futebolaovivogratis.live/jogos-de-hoje"
+      "destination": "https://futebolaovivo.vercel.app"
     }
   ]
 }
