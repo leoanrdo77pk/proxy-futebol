@@ -1,9 +1,6 @@
 const express = require("express");
 const request = require("request");
-const cors = require("cors");
-
 const app = express();
-app.use(cors());
 
 app.use("/", (req, res) => {
   const url = "https://futebol7k.com" + req.url;
@@ -17,7 +14,8 @@ app.use("/", (req, res) => {
     },
     (error, response, body) => {
       if (error) return res.status(500).send("Erro ao carregar conteúdo");
-      // Remove os headers bloqueadores
+
+      res.setHeader("Access-Control-Allow-Origin", "*");
       res.removeHeader("X-Frame-Options");
       res.removeHeader("Content-Security-Policy");
       res.send(body);
@@ -25,5 +23,4 @@ app.use("/", (req, res) => {
   );
 });
 
-app.listen(3000, () => console.log("Proxy ativo na porta 3000"));
-
+module.exports = app;
