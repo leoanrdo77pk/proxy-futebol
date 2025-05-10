@@ -1,14 +1,12 @@
-const axios = require('axios');
+const express = require('express');
+const request = require('request');
+const app = express();
 
-module.exports = async (req, res) => {
-  try {
-    // Solicita o conteúdo do site externo
-    const response = await axios.get('https://futebol7k.com');
-    
-    // Envia o conteúdo de volta para o navegador
-    res.status(200).send(response.data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao carregar conteúdo');
-  }
-};
+const TARGET = 'https://futebol7k.com/';
+
+app.use('/futebol', (req, res) => {
+  const url = TARGET + req.url;
+  req.pipe(request({ url, headers: { 'Referer': TARGET } })).pipe(res);
+});
+
+module.exports = app;
