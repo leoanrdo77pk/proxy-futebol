@@ -18,7 +18,7 @@
 </head>
 <body>
   <iframe
-    src="https://seu-projeto.vercel.app/site"
+    src="/site"
     allowfullscreen
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
     referrerpolicy="no-referrer"
