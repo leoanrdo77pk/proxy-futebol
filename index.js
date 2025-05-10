@@ -2,7 +2,7 @@ const express = require('express');
 const request = require('request');
 const app = express();
 
-const TARGET = 'https://futebolaovivogratishd.com.br/';
+const TARGET = '';
 
 app.use('/futebol', (req, res) => {
   const url = TARGET + req.url;
