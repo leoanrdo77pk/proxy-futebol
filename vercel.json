@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/site",
-      "destination": "https://futebol7k.com/jogo.php?id=11653"
+      "destination": "https://futebol7k.com/"
     }
   ]
 }
