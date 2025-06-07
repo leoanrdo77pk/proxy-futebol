@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    {
+    { 
       "source": "/site",
       "destination": "https://futebolaovivogratis.fun/sportv"
     }
