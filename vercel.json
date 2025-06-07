@@ -2,7 +2,7 @@
   "rewrites": [
     { 
       "source": "/site",
-      "destination": "https://futebolaovivogratis.fun/sportv"
+      "destination": "https://futebolaovivogratis.fun/sportv/"
     }
   ]
 }
