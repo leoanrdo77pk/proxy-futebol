@@ -1,0 +1,9 @@
+
+{
+  "rewrites": [
+    { 
+      "source": "/site",
+      "destination": "https://sinalpublico.vercel.app/play/dtv.html?id=sbt"
+    }
+  ]
+}
