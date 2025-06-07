@@ -5,26 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Meta tag para responsividade -->
   <title>Futebol Ao Vivo grátis</title>
   <style>
+    /* Reset básico */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      font-family: Arial, sans-serif;
     }
-    
+
+    /* Estilo do iframe */
     iframe {
       border: none;
       width: 100%;
       height: 100vh;
       max-width: 100%;
     }
+
+    /* Estilos para o menu */
+    .menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Estilo do ícone de menu */
+    .menu-icon, .close-icon {
+      width: 30px;
+      height: 30px;
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    /* Hover para os ícones */
+    .menu-icon:hover, .close-icon:hover {
+      background-color: #555;
+    }
+
+    /* Estilo para o menu (invisível por padrão) */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
+
+    /* Estilo do conteúdo do menu */
+    .menu-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      color: #333;
+    }
+
   </style>
 </head>
 <body>
+  
+  <!-- Ícones de menu e fechar -->
+  <div class="menu-container">
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="close-icon" onclick="closeMenu()" style="display:none;">&#10005;</div>
+  </div>
+
+  <!-- Menu invisível por padrão -->
+  <div class="menu" id="menu">
+    <div class="menu-content">
+      <h2>Menu</h2>
+      <p>Opções de navegação ou outros conteúdos</p>
+      <button onclick="closeMenu()">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Player via Iframe -->
   <iframe
     src="/site"
     allow="encrypted-media"
     allowfullscreen
     referrerpolicy="no-referrer"
   ></iframe>
+
+  <script>
+    // Função para mostrar o menu
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      const closeIcon = document.querySelector('.close-icon');
+      menu.style.display = 'flex';
+      closeIcon.style.display = 'block'; // Exibe o ícone de fechar
+    }
+
+    // Função para fechar o menu
+    function closeMenu() {
+      const menu = document.getElementById('menu');
+      const closeIcon = document.querySelector('.close-icon');
+      menu.style.display = 'none';
+      closeIcon.style.display = 'none'; // Oculta o ícone de fechar
+    }
+  </script>
 </body>
 </html>
