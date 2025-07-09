@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Futebol Ao Vivo grátis</title>
   <style>
     html, body {
@@ -16,35 +16,17 @@
       max-width: 100%;
       display: block;
     }
-    .overlay-full {
+    .banner-link {
       position: fixed;
-      bottom: 0; /* pode ajustar se quiser em cima */
+      bottom: 0; /* pode ajustar para top, left, right */
       left: 0;
       width: 100%;
       z-index: 9999;
-      pointer-events: auto; /* permite clicar na imagem */
     }
-    .overlay-full img {
+    .banner-link img {
       width: 100%;
       height: auto;
       display: block;
-    }
-    .close-btn {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      background: transparent;
-      color: white;
-      border: none;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 10000;
-      font-weight: bold;
-      text-shadow: 0 0 5px black;
-    }
-    .overlay-wrapper {
-      position: relative;
-      width: 100%;
     }
   </style>
 </head>
@@ -57,14 +39,14 @@
     referrerpolicy="no-referrer"
   ></iframe>
 
-  <div class="overlay-full" id="overlayFull">
-    <div class="overlay-wrapper">
-      <button class="close-btn" onclick="document.getElementById('overlayFull').style.display='none'">&times;</button>
-      <a href="https://8xbet86.com/" target="_blank" rel="noopener noreferrer">
-        <img src="https://i.imgur.com/Fen20UR.gif" alt="Banner sem fundo">
-      </a>
-    </div>
-  </div>
+  <a
+    href="https://8xbet86.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="banner-link"
+  >
+    <img src="https://i.imgur.com/Fen20UR.gif" alt="Banner link" />
+  </a>
 
 </body>
 </html>
