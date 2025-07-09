@@ -3,7 +3,7 @@
   "rewrites": [
     { 
       "source": "/site",
-      "destination": "https://futebol7k"
+      "destination": "https://futebol7k/"
     }
   ]
 }
