@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Meta tag para responsividade -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Futebol Ao Vivo grátis</title>
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
       height: 100%;
+      width: 100%;
+      overflow: hidden;
     }
-    
+
     iframe {
       border: none;
       width: 100%;
@@ -18,15 +20,45 @@
       max-width: 100%;
     }
 
+    .overlay {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      z-index: 9999;
+      box-shadow: 0 0 10px #000;
+      font-family: sans-serif;
+    }
 
+    .overlay button {
+      background: #ff0000;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- IFRAME -->
   <iframe
     src="/site"
     allow="encrypted-media"
     allowfullscreen
     referrerpolicy="no-referrer"
   ></iframe>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay">
+    ⚽ Assista sem travar! Clique em tela cheia!
+    <button onclick="document.getElementById('overlay').style.display='none'">Fechar</button>
+  </div>
+
 </body>
 </html>
