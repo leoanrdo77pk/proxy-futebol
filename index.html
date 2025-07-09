@@ -20,27 +20,32 @@
       max-width: 100%;
     }
 
-    .overlay {
+    .overlay-banner {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 15px 20px;
-      border-radius: 10px;
       z-index: 9999;
-      box-shadow: 0 0 10px #000;
-      font-family: sans-serif;
     }
 
-    .overlay button {
-      background: #ff0000;
+    .overlay-banner img {
+      width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #000;
+      color: #fff;
       border: none;
-      color: white;
-      padding: 5px 10px;
-      margin-left: 10px;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
       cursor: pointer;
-      border-radius: 5px;
+      z-index: 10000;
     }
   </style>
 </head>
@@ -54,10 +59,12 @@
     referrerpolicy="no-referrer"
   ></iframe>
 
-  <!-- OVERLAY -->
-  <div class="overlay" id="overlay">
-    ⚽ Assista sem travar! Clique em tela cheia!
-    <button onclick="document.getElementById('overlay').style.display='none'">Fechar</button>
+  <!-- OVERLAY COM IMAGEM -->
+  <div class="overlay-banner" id="overlayBanner">
+    <button class="close-btn" onclick="document.getElementById('overlayBanner').style.display='none'">×</button>
+    <a href="https://8xbet86.com/" target="_blank">
+      <img src="https://i.imgur.com/Fen20UR.gif" alt="Banner">
+    </a>
   </div>
 
 </body>
