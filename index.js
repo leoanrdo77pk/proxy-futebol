@@ -48,10 +48,9 @@ module.exports = async (req, res) => {
 <style>
   #custom-overlay {
     position: fixed;
-    top: 0;
+    bottom: 0;  /* Coloca o overlay na parte inferior */
     left: 0;
     width: 100%;
-    height: 100%;
     background: rgba(0, 150, 136, 0.8); /* Cor #009688 com transparência */
     color: white;
     display: flex;
@@ -60,6 +59,7 @@ module.exports = async (req, res) => {
     font-size: 24px;
     z-index: 9998;
     text-align: center;
+    padding: 10px 0; /* Adiciona um pouco de espaço em cima e embaixo do texto */
   }
   #custom-overlay p {
     margin: 0;
@@ -92,10 +92,9 @@ ${data}
 <style>
   #custom-overlay {
     position: fixed;
-    top: 0;
+    bottom: 0;  /* Coloca o overlay na parte inferior */
     left: 0;
     width: 100%;
-    height: 100%;
     background: rgba(0, 150, 136, 0.8); /* Cor #009688 com transparência */
     color: white;
     display: flex;
@@ -104,6 +103,7 @@ ${data}
     font-size: 24px;
     z-index: 9998;
     text-align: center;
+    padding: 10px 0; /* Adiciona um pouco de espaço em cima e embaixo do texto */
   }
   #custom-overlay p {
     margin: 0;
