@@ -1,31 +1,38 @@
 const https = require('https');
 
 module.exports = async (req, res) => {
-  const path = req.url === '/' ? '' : req.url;
-  const targetUrl = 'https://apk.futemais.net/app2/' + path;  // Alterado para o novo site
+  try {
+    const path = req.url === '/' ? '' : req.url;
+    const targetUrl = 'https://apk.futemais.net/app2/' + path;
 
-  https.get(targetUrl, {
-    headers: {
-      'User-Agent': req.headers['user-agent'] || 'Mozilla/5.0',
-      'Referer': 'https://apk.futemais.net/app2/',  // Alterado para o novo site
-    }
-  }, (resp) => {
-    let data = '';
+    https.get(targetUrl, {
+      headers: {
+        'User-Agent': req.headers['user-agent'] || 'Mozilla/5.0',
+        'Referer': 'https://apk.futemais.net/app2/',
+      }
+    }, (resp) => {
+      let data = '';
 
-    resp.on('data', chunk => data += chunk);
-    resp.on('end', () => {
-      // Reescreve links para manter no domínio Vercel
-      data = data
-        .replace(/https:\/\/apk\.futemais\.net\//g, '/')  // Alterado para o novo site
-        .replace(/href='\/([^']+)'/g, "href='/$1'")
-        .replace(/href="\/([^"]+)"/g, 'href="/$1"')
-        .replace(/action="\/([^"]+)"/g, 'action="/$1"')
-        .replace(/<base[^>]*>/gi, '');
+      resp.on('data', chunk => data += chunk);
+      resp.on('end', () => {
+        try {
+          // Reescreve links para manter no domínio Vercel
+          data = data
+            .replace(/https:\/\/https://apk.futemais\.net\app2\//g, '/') // Reescreve os links do domínio original
+            .replace(/href='\/([^']+)'/g, "href='/$1'")
+            .replace(/href="\/([^"]+)"/g, 'href="/$1"')
+            .replace(/action="\/([^"]+)"/g, 'action="/$1"')
+            .replace(/<base[^>]*>/gi, ''); // Remove a tag base se existir
 
-      // Injeção segura de banner no final do body com verificação
-      let finalHtml;
-      if (data.includes('</body>')) {
-        finalHtml = data.replace('</body>', `
+          // Remover ou alterar o título e o ícone
+          data = data
+            .replace(/<title>[^<]*<\/title>/, '<title>Meu Site</title>')  // Título personalizado
+            .replace(/<link[^>]*rel=["']icon["'][^>]*>/gi, '');  // Remove o ícone
+
+          // Injeção segura de banner no final do body com verificação
+          let finalHtml;
+          if (data.includes('</body>')) {
+            finalHtml = data.replace('</body>', `
 <div id="custom-footer">
   <a href="https://8xbet86.com/" target="_blank">
     <img src="https://i.imgur.com/Fen20UR.gif" style="width:100%;max-height:100px;object-fit:contain;cursor:pointer;" alt="Banner" />
@@ -44,9 +51,9 @@ module.exports = async (req, res) => {
   body { padding-bottom: 120px !important; }
 </style>
 </body>`);
-      } else {
-        // Se não tiver </body>, adiciona manualmente
-        finalHtml = `
+          } else {
+            // Se não tiver </body>, adiciona manualmente
+            finalHtml = `
 ${data}
 <div id="custom-footer">
   <a href="https://8xbet86.com/" target="_blank">
@@ -65,16 +72,26 @@ ${data}
   }
   body { padding-bottom: 120px !important; }
 </style>`;
-      }
+          }
 
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Content-Type', resp.headers['content-type'] || 'text/html');
-      res.statusCode = 200;
-      res.end(finalHtml);
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.setHeader('Content-Type', resp.headers['content-type'] || 'text/html');
+          res.statusCode = 200;
+          res.end(finalHtml);
+        } catch (err) {
+          console.error("Erro ao processar o HTML:", err);
+          res.statusCode = 500;
+          res.end("Erro ao processar o conteúdo.");
+        }
+      });
+    }).on("error", (err) => {
+      console.error("Erro ao fazer requisição HTTPS:", err);
+      res.statusCode = 500;
+      res.end("Erro ao carregar conteúdo.");
     });
-  }).on("error", (err) => {
-    console.error("Erro:", err.message);
+  } catch (err) {
+    console.error("Erro geral:", err);
     res.statusCode = 500;
-    res.end("Erro ao carregar conteúdo");
-  });
+    res.end("Erro interno.");
+  }
 };
