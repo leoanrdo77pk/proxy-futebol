@@ -2,12 +2,12 @@ const https = require('https');
 
 module.exports = async (req, res) => {
   const path = req.url === '/' ? '' : req.url;
-  const targetUrl = 'https://futebol7k.com' + path;
+  const targetUrl = 'https://apk.futemais.net/app2/' + path;  // Alterado para o novo site
 
   https.get(targetUrl, {
     headers: {
       'User-Agent': req.headers['user-agent'] || 'Mozilla/5.0',
-      'Referer': 'https://futebol7k.com',
+      'Referer': 'https://apk.futemais.net/app2/',  // Alterado para o novo site
     }
   }, (resp) => {
     let data = '';
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     resp.on('end', () => {
       // Reescreve links para manter no domínio Vercel
       data = data
-        .replace(/https:\/\/futebol7k\.com\//g, '/')
+        .replace(/https:\/\/apk\.futemais\.net\//g, '/')  // Alterado para o novo site
         .replace(/href='\/([^']+)'/g, "href='/$1'")
         .replace(/href="\/([^"]+)"/g, 'href="/$1"')
         .replace(/action="\/([^"]+)"/g, 'action="/$1"')
@@ -26,23 +26,23 @@ module.exports = async (req, res) => {
       let finalHtml;
       if (data.includes('</body>')) {
         finalHtml = data.replace('</body>', `
-  <div id="custom-footer">
-    <a href="https://8xbet86.com/" target="_blank">
-      <img src="https://i.imgur.com/Fen20UR.gif" style="width:100%;max-height:100px;object-fit:contain;cursor:pointer;" alt="Banner" />
-    </a>
-  </div>
-  <style>
-    #custom-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: transparent;
-      text-align: center;
-      z-index: 9999;
-    }
-    body { padding-bottom: 120px !important; }
-  </style>
+<div id="custom-footer">
+  <a href="https://8xbet86.com/" target="_blank">
+    <img src="https://i.imgur.com/Fen20UR.gif" style="width:100%;max-height:100px;object-fit:contain;cursor:pointer;" alt="Banner" />
+  </a>
+</div>
+<style>
+  #custom-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    z-index: 9999;
+  }
+  body { padding-bottom: 120px !important; }
+</style>
 </body>`);
       } else {
         // Se não tiver </body>, adiciona manualmente
@@ -67,8 +67,6 @@ ${data}
 </style>`;
       }
 
-
-      
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Content-Type', resp.headers['content-type'] || 'text/html');
       res.statusCode = 200;
