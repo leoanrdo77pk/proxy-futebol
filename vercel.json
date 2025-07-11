@@ -4,13 +4,11 @@
     { "src": "index.js", "use": "@vercel/node" }
   ],
   "routes": [
-    // Redirecionamento para o primeiro site
-    { "src": "/redirect/futebol7k", "dest": "https://futebol7k.com" },
+    // Redirecionamentos personalizados
+    { "src": "/redirect/1", "dest": "https://links3.futemais.net/" },
+    { "src": "/redirect/2", "dest": "https://outrolink.com/" },
     
-    // Redirecionamento para o segundo site
-    { "src": "/redirect/futemais", "dest": "https://apk.futemais.net/app2/" },
-
-    // Rota padrão
+    // Rota padrão que chama o arquivo index.js para o conteúdo
     { "src": "/(.*)", "dest": "/index.js" }
   ]
 }
