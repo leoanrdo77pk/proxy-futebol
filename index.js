@@ -18,10 +18,23 @@ module.exports = async (req, res) => {
         try {
           // Reescreve links para manter no domínio Vercel
           data = data
-            .replace(/https:\/\/apk\.futemais\.net\/app2\//g, '/') // Substituindo o domínio para o relativo
+            .replace(/https:\/\/apk\.futemais\.net\/app2\//g, '/')
             .replace(/href=['"]\/([^'"]+)['"]/g, 'href="/$1"') // Links internos
             .replace(/action=['"]\/([^'"]+)['"]/g, 'action="/$1"') // Links de action
-            .replace(/<base[^>]*>/gi, ''); // Remove qualquer tag <base>
+            .replace(/<base[^>]*>/gi, ''); // Remove a tag base
+
+          // Substituir links específicos para camuflá-los
+          const urlMap = {
+            'https://links3.futemais.net/': '/redirect/1',
+            'https://outrolink.com/': '/redirect/2',
+            // Adicione mais links conforme necessário
+          };
+
+          // Iterar e substituir links
+          for (let [originalUrl, redirectPath] of Object.entries(urlMap)) {
+            const regex = new RegExp(originalUrl, 'g');
+            data = data.replace(regex, redirectPath);
+          }
 
           // Remover ou alterar o título e o ícone
           data = data
