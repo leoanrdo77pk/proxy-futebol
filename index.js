@@ -33,12 +33,15 @@ module.exports = async (req, res) => {
             .replace(/<title>[^<]*<\/title>/, '<title>Meu Site</title>')  // Coloque aqui o título desejado
             .replace(/<link[^>]*rel=["']icon["'][^>]*>/gi, '');  // Remove o ícone
 
-          // Adicionar overlay para o aplicativo
+          // Adicionar Modal para o aplicativo
           let finalHtml;
           if (data.includes('</body>')) {
             finalHtml = data.replace('</body>', `
-<div id="custom-overlay">
-  <p>Baixe nosso aplicativo</p>
+<div id="custom-modal">
+  <div id="modal-content">
+    <p>Baixe nosso aplicativo</p>
+    <button id="close-modal">Fechar</button>
+  </div>
 </div>
 <div id="custom-footer">
   <a href="https://8xbet86.com/" target="_blank">
@@ -46,25 +49,52 @@ module.exports = async (req, res) => {
   </a>
 </div>
 <style>
-  #custom-overlay {
+  /* Modal Styling */
+  #custom-modal {
+    display: none; /* Modal inicialmente escondido */
     position: fixed;
-    bottom: 0;  /* Coloca o overlay na parte inferior */
+    top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     background: rgba(0, 150, 136, 0.8); /* Cor #009688 com transparência */
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
     z-index: 9998;
     text-align: center;
-    padding: 10px 0; /* Adiciona um pouco de espaço em cima e embaixo do texto */
   }
-  #custom-overlay p {
-    margin: 0;
+
+  #modal-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  #modal-content p {
+    font-size: 24px;
     font-weight: bold;
   }
+
+  #close-modal {
+    background-color: #009688;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  #close-modal:hover {
+    background-color: #00796b;
+  }
+
   #custom-footer {
     position: fixed;
     bottom: 0;
@@ -74,15 +104,30 @@ module.exports = async (req, res) => {
     text-align: center;
     z-index: 9999;
   }
+
   body { padding-bottom: 120px !important; }
 </style>
+<script>
+  // Exibe o modal ao carregar a página
+  window.onload = function() {
+    document.getElementById('custom-modal').style.display = 'flex';
+  };
+
+  // Fecha o modal ao clicar no botão de fechar
+  document.getElementById('close-modal').onclick = function() {
+    document.getElementById('custom-modal').style.display = 'none';
+  };
+</script>
 </body>`);
           } else {
             // Se não tiver </body>, adiciona manualmente
             finalHtml = `
 ${data}
-<div id="custom-overlay">
-  <p>Baixe nosso aplicativo</p>
+<div id="custom-modal">
+  <div id="modal-content">
+    <p>Baixe nosso aplicativo</p>
+    <button id="close-modal">Fechar</button>
+  </div>
 </div>
 <div id="custom-footer">
   <a href="https://8xbet86.com/" target="_blank">
@@ -90,25 +135,52 @@ ${data}
   </a>
 </div>
 <style>
-  #custom-overlay {
+  /* Modal Styling */
+  #custom-modal {
+    display: none; /* Modal inicialmente escondido */
     position: fixed;
-    bottom: 0;  /* Coloca o overlay na parte inferior */
+    top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     background: rgba(0, 150, 136, 0.8); /* Cor #009688 com transparência */
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
     z-index: 9998;
     text-align: center;
-    padding: 10px 0; /* Adiciona um pouco de espaço em cima e embaixo do texto */
   }
-  #custom-overlay p {
-    margin: 0;
+
+  #modal-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  #modal-content p {
+    font-size: 24px;
     font-weight: bold;
   }
+
+  #close-modal {
+    background-color: #009688;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  #close-modal:hover {
+    background-color: #00796b;
+  }
+
   #custom-footer {
     position: fixed;
     bottom: 0;
@@ -118,8 +190,21 @@ ${data}
     text-align: center;
     z-index: 9999;
   }
+
   body { padding-bottom: 120px !important; }
-</style>`;
+</style>
+<script>
+  // Exibe o modal ao carregar a página
+  window.onload = function() {
+    document.getElementById('custom-modal').style.display = 'flex';
+  };
+
+  // Fecha o modal ao clicar no botão de fechar
+  document.getElementById('close-modal').onclick = function() {
+    document.getElementById('custom-modal').style.display = 'none';
+  };
+</script>
+</body>`;
           }
 
           res.setHeader('Access-Control-Allow-Origin', '*');
