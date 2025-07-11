@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
         try {
           // Reescreve links para manter no domínio Vercel
           data = data
-            .replace(/https:\/\/https://apk.futemais\.net\app2\//g, '/') // Reescreve os links do domínio original
+            .replace(/https:\/\/https://apk.futemais\.net\//g, '/') // Reescreve os links do domínio original
             .replace(/href='\/([^']+)'/g, "href='/$1'")
             .replace(/href="\/([^"]+)"/g, 'href="/$1"')
             .replace(/action="\/([^"]+)"/g, 'action="/$1"')
