@@ -18,15 +18,15 @@ module.exports = async (req, res) => {
         try {
           // Reescreve links para manter no domínio Vercel
           data = data
-            .replace(/https:\/\/https://apk.futemais\.net\//g, '/') // Reescreve os links do domínio original
+            .replace(/https:\/\/apk.futemais\.net\/app2\//g, '/')
             .replace(/href='\/([^']+)'/g, "href='/$1'")
             .replace(/href="\/([^"]+)"/g, 'href="/$1"')
             .replace(/action="\/([^"]+)"/g, 'action="/$1"')
-            .replace(/<base[^>]*>/gi, ''); // Remove a tag base se existir
+            .replace(/<base[^>]*>/gi, '');
 
           // Remover ou alterar o título e o ícone
           data = data
-            .replace(/<title>[^<]*<\/title>/, '<title>Meu Site</title>')  // Título personalizado
+            .replace(/<title>[^<]*<\/title>/, '<title>Meu Site</title>')  // Coloque aqui o título desejado
             .replace(/<link[^>]*rel=["']icon["'][^>]*>/gi, '');  // Remove o ícone
 
           // Injeção segura de banner no final do body com verificação
@@ -95,3 +95,5 @@ ${data}
     res.end("Erro interno.");
   }
 };
+
+
